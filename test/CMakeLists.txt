@@ -2,9 +2,6 @@
 # We can add GTest for Test Driven Development (TDD) purposes to our project
 # as desribed by this tutorial: https://chromium.googlesource.com/external/github.com/google/googletest/+/HEAD/googletest/README.md
 
-set(ASIO_WRAPPER_TEST_SOURCES
-    ./../src/test/asio_wrapper_test.cc)
-
 # Note that the code below has been copied from the link provided above.
 
 # START OF COPIED CODE #
@@ -42,7 +39,7 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
 endif()
 
 # Now simply link against gtest or gtest_main as needed. Eg
-add_executable(asio-wrapper-tests main.cc ${ASIO_WRAPPER_TEST_SOURCES})
+add_executable(asio-wrapper-tests main.cc ${ASIO_WRAPPER_SOURCES} ${ASIO_WRAPPER_TEST_SOURCES})
 target_link_libraries(asio-wrapper-tests gtest_main)
 add_test(NAME asio-wrapper-tests COMMAND asio-wrapper-tests)
 

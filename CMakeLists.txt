@@ -23,5 +23,20 @@ set(asio-wrapper_VERSION_PATCH 0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# include directory
+include_directories(include)
+
+# Set the source files
+set(ASIO_WRAPPER_SOURCES
+    # tcp
+    ${PROJECT_SOURCE_DIR}/src/tcp/server.cc ${PROJECT_SOURCE_DIR}/include/tcp/server.h
+    ${PROJECT_SOURCE_DIR}/src/tcp/client.cc ${PROJECT_SOURCE_DIR}/include/tcp/client.h
+    # interfaces
+    ${PROJECT_SOURCE_DIR}/include/interfaces/writable.h
+    ${PROJECT_SOURCE_DIR}/include/interfaces/writable_handler.h)
+
+set(ASIO_WRAPPER_TEST_SOURCES
+    ${PROJECT_SOURCE_DIR}/src/tcp/server_test.cc)
+
 # add sub_directories
 add_subdirectory(test)
