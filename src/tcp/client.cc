@@ -38,7 +38,7 @@ bool Client::Stop() {
     return false;
 }
 
-void Write(void* data, int len) {
+void Client::Write(void* data, int len) {
 
     // TODO: Implement
 
