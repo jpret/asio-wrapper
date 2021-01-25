@@ -16,18 +16,15 @@
 namespace cppeng {
 namespace tcp {
 
-bool Server::Initialise(int port, interfaces::WritableHandler& writable_handler) {
-    
-    // Todo:: Implement
-
-    return false;
+Server::Server(int port, interfaces::WritableHandler& writable_handler)
+    : writable_handler_(writable_handler) {
+	asio::ip::tcp::endpoint endpoint(asio::ip::tcp::v4(), port);
+	acceptor_ = std::unique_ptr<Acceptor>(new Acceptor(io_context_, endpoint, writable_handler_));
 }
 
 bool Server::Start() {
-
-    // Todo:: Implement
-
-    return false;
+    io_context_.run();
+    return true;
 }
 
 bool Server::Stop() {

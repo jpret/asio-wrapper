@@ -6,13 +6,13 @@
     PROJECT:        asio-wrapper
     DESCRIPTION:    An ASIO wrapper
 
-    FILE:           tcp/connection_manager_inerface.h
+    FILE:           interfaces/connection_manager.h
     URL: 	        https://github.com/cppengineer/asio-wrapper
 
 *******************************************************************************/
 
-#ifndef ASIO_WRAPPER_TCP_CONNECTION_MANAGER_INTERFACE_H_
-#define ASIO_WRAPPER_TCP_CONNECTION_MANAGER_INTERFACE_H_
+#ifndef ASIO_WRAPPER_INTERFACES_CONNECTION_MANAGER_H_
+#define ASIO_WRAPPER_INTERFACES_CONNECTION_MANAGER_H_
 
 #include "interfaces/writable.h"
 
@@ -28,4 +28,4 @@ public:
 } // namespace tcp
 } // namespace cppeng
 
-#endif // ASIO_WRAPPER_TCP_CONNECTION_MANAGER_INTERFACE_H_
+#endif // ASIO_WRAPPER_INTERFACES_CONNECTION_MANAGER_H_

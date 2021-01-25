@@ -44,7 +44,5 @@ void Client::Write(void* data, int len) {
 
 }
 
-
-
 } // namespace tcp
 } // namespace cppeng

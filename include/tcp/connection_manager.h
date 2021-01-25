@@ -18,9 +18,9 @@
 #include <string>
 
 #include "asio/asio.hpp"
+#include "interfaces/connection_manager.h"
 #include "interfaces/writable.h"
 #include "interfaces/writable_handler.h"
-#include "tcp/connection_manager_interface.h"
 
 namespace cppeng {
 namespace tcp {
@@ -29,7 +29,9 @@ class ConnectionManager: public interfaces::Writable,
                          public tcp::IConnectionManager {
  public:
      void Connect(std::shared_ptr<interfaces::Writable> writable) override;
+
      void Disconnect(std::shared_ptr<interfaces::Writable> writable) override;
+
      void Write(void* data, int len) override;
 private:
     std::set<std::shared_ptr<interfaces::Writable>> writables_;

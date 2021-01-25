@@ -14,18 +14,24 @@
 #ifndef ASIO_WRAPPER_TCP_SERVER_H_
 #define ASIO_WRAPPER_TCP_SERVER_H_
 
+#include "asio/asio.hpp"
 #include "interfaces/writable.h"
 #include "interfaces/writable_handler.h"
+#include "acceptor.h"
 
 namespace cppeng {
 namespace tcp {
 
 class Server: public interfaces::Writable {
  public:
-  bool Initialise(int port, interfaces::WritableHandler &writable_handler);
+  Server(int port, interfaces::WritableHandler &writable_handler);
   bool Start();
   bool Stop();
   void Write(void* data, int len) override;
+private:
+    asio::io_context io_context_;
+    std::unique_ptr<Acceptor> acceptor_;
+    interfaces::WritableHandler& writable_handler_;
 };
 
 } // namespace tcp

@@ -11,7 +11,7 @@
 
 *******************************************************************************/
 
-#include "connector.h"
+#include "tcp/connector.h"
 
 namespace cppeng {
 namespace tcp {
