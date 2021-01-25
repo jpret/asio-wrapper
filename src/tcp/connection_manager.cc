@@ -16,7 +16,19 @@
 namespace cppeng {
 namespace tcp {
 
-    // Add socket connection manager methods here
+void ConnectionManager::Connect(std::shared_ptr<interfaces::Writable> writable) {
+    // Insert the writable into the list
+    writables_.insert(writable);
+}
+
+void ConnectionManager::Disconnect(std::shared_ptr<interfaces::Writable> writable) {
+    // Remove the writable from the list
+    writables_.erase(writable);
+}
+
+void ConnectionManager::Write(void* data, int len) {
+    //TODO:: Add write to writables here
+}
 
 } // namespace tcp
 } // namespace cppeng
