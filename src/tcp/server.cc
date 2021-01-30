@@ -23,21 +23,32 @@ Server::Server(int port, interfaces::WritableHandler& writable_handler)
 }
 
 bool Server::Start() {
-    io_context_.run();
-    return true;
+    bool result = false;
+    // First check if the worker is already running / not
+    if (!worker_.joinable()) {
+        worker_ = std::thread([&]() {
+            io_context_.run();
+        });
+        result = true;
+    }
+    return result;
 }
 
 bool Server::Stop() {
-
-    // Todo:: Implement
-
-    return false;
+    bool result = false;
+    // First check if the worker is already running / not
+    if (worker_.joinable()) {
+        io_context_.stop();
+        worker_.join();
+        // Reset our worker
+        io_context_.reset();
+        result = true;
+    }
+    return result;
 }
 
 void Server::Write(void* data, int len) {
-
-    // Todo:: Implement
-
+    acceptor_->Write(data, len);
 }
 
 } // namespace tcp

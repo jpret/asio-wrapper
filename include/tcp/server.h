@@ -14,10 +14,12 @@
 #ifndef ASIO_WRAPPER_TCP_SERVER_H_
 #define ASIO_WRAPPER_TCP_SERVER_H_
 
+#include <thread>
+
 #include "asio/asio.hpp"
 #include "interfaces/writable.h"
 #include "interfaces/writable_handler.h"
-#include "acceptor.h"
+#include "tcp/acceptor.h"
 
 namespace cppeng {
 namespace tcp {
@@ -32,6 +34,7 @@ private:
     asio::io_context io_context_;
     std::unique_ptr<Acceptor> acceptor_;
     interfaces::WritableHandler& writable_handler_;
+    std::thread worker_;
 };
 
 } // namespace tcp

@@ -29,7 +29,8 @@ namespace tcp {
 class Connection: public interfaces::Writable, 
                   public std::enable_shared_from_this<Connection> {
  public:
-     Connection(asio::ip::tcp::socket socket,
+     Connection(asio::io_context &io_context,
+                asio::ip::tcp::socket socket,
                 tcp::IConnectionManager& connection_manager,
                 interfaces::WritableHandler& writable_handler);
      
@@ -48,8 +49,10 @@ private:
     tcp::IConnectionManager& connection_manager_;
     interfaces::WritableHandler& writable_handler_;
     asio::ip::tcp::socket socket_;
+    asio::io_context& io_context_;
     std::array<uint8_t, 8192> read_buffer_;
     std::queue<std::pair<int, uint8_t*>> write_queue_;
+    bool write_busy_;
 };
 
 } // namespace tcp

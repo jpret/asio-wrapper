@@ -19,15 +19,28 @@
 #include "asio/asio.hpp"
 #include "interfaces/writable.h"
 #include "interfaces/writable_handler.h"
+#include "tcp/connection_manager.h"
 
 namespace cppeng {
 namespace tcp {
 
 class Connector: public interfaces::Writable {
- public:
-
-     // Add socket connection connector methods here
-
+public:
+	Connector(asio::io_context& io_context,
+		std::string address,
+		int port,
+		interfaces::WritableHandler& writable_handler);
+	void Write(void* data, int len) override;
+	bool IsConnected() const;
+private:
+	const std::string address_;
+	const int port_;
+	ConnectionManager connection_manager_;
+	asio::ip::tcp::socket socket_;
+	asio::io_context &io_context_;
+	interfaces::WritableHandler& writable_handler_;
+	bool connected_;
+	void DoConnect(const asio::ip::tcp::resolver::results_type& endpoints);
 };
 
 } // namespace tcp

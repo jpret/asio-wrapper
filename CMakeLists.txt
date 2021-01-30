@@ -34,18 +34,15 @@ include_directories(include
 # set the source files
 set(ASIO_WRAPPER_SOURCES
     # tcp
-    ${PROJECT_SOURCE_DIR}/src/tcp/server.cc ${PROJECT_SOURCE_DIR}/include/tcp/server.h
-    ${PROJECT_SOURCE_DIR}/src/tcp/client.cc ${PROJECT_SOURCE_DIR}/include/tcp/client.h
-    ${PROJECT_SOURCE_DIR}/src/tcp/acceptor.cc ${PROJECT_SOURCE_DIR}/src/tcp/acceptor.h
-    ${PROJECT_SOURCE_DIR}/src/tcp/connector.cc ${PROJECT_SOURCE_DIR}/src/tcp/connector.h
-    ${PROJECT_SOURCE_DIR}/src/tcp/connection_manager.cc ${PROJECT_SOURCE_DIR}/src/tcp/connection_manager.h
-    ${PROJECT_SOURCE_DIR}/src/tcp/connection.cc ${PROJECT_SOURCE_DIR}/src/tcp/connection.h
-    # interfaces
-    ${PROJECT_SOURCE_DIR}/include/interfaces/writable.h
-    ${PROJECT_SOURCE_DIR}/include/interfaces/writable_handler.h)
+    ${PROJECT_SOURCE_DIR}/src/tcp/server.cc 
+    ${PROJECT_SOURCE_DIR}/src/tcp/client.cc 
+    ${PROJECT_SOURCE_DIR}/src/tcp/acceptor.cc 
+    ${PROJECT_SOURCE_DIR}/src/tcp/connector.cc
+    ${PROJECT_SOURCE_DIR}/src/tcp/connection_manager.cc 
+    ${PROJECT_SOURCE_DIR}/src/tcp/connection.cc)
 
 set(ASIO_WRAPPER_TEST_SOURCES
-    ${PROJECT_SOURCE_DIR}/src/tcp/server_test.cc)
+    ${PROJECT_SOURCE_DIR}/src/tcp/test/tcp_test.cc)
 
 # add sub_directories
 add_subdirectory(lib)

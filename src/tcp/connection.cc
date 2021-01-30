@@ -16,15 +16,18 @@
 namespace cppeng {
 namespace tcp {
 
-Connection::Connection(asio::ip::tcp::socket socket,
-                        tcp::IConnectionManager& connection_manager,
-                        interfaces::WritableHandler& writable_handler)
-    : socket_(std::move(socket)),
-        connection_manager_(connection_manager),
-        writable_handler_(writable_handler),
-        write_queue_{},
-        read_buffer_{} {}
-
+Connection::Connection(asio::io_context& io_context,
+                       asio::ip::tcp::socket socket,
+                       tcp::IConnectionManager& connection_manager,
+                       interfaces::WritableHandler& writable_handler)
+    : io_context_(io_context),
+      socket_(std::move(socket)),
+      connection_manager_(connection_manager),
+      writable_handler_(writable_handler),
+      write_queue_{},
+      read_buffer_{},
+      write_busy_{}  {}
+        
 bool Connection::Start() {
     // Connect ourselves to the connection manager
     connection_manager_.Connect(shared_from_this());
@@ -37,6 +40,10 @@ bool Connection::Start() {
 void Connection::Close() {
     // Disconnect ourselves from the connection manager
     connection_manager_.Disconnect(shared_from_this());
+
+    // Stop the socket in the io_context thread as well
+    // Todo: Fix this
+       // asio::post(io_context_, [this]() { socket_.close(); });
 }
 
 void Connection::Write(void* data, int len) {
@@ -46,6 +53,11 @@ void Connection::Write(void* data, int len) {
     auto pair = std::pair<int, uint8_t*>(len, buffer);
     // Add the buffer t the queue
     write_queue_.push(pair);
+    // Start the write process only if we are not already busy writing
+    if (!write_busy_) {
+        write_busy_ = true;
+        DoWrite();
+    }
 }
 
 void Connection::DoRead() {
@@ -77,6 +89,8 @@ void Connection::DoWrite() {
             write_queue_.pop();
             if (!write_queue_.empty()) {
                 DoWrite();
+            } else {
+                write_busy_ = false;
             }
         }
         else {
