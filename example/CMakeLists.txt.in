@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 2.8.12)
+
+project(asio-wrapper-download NONE)
+
+include(ExternalProject)
+ExternalProject_Add(asio-wrapper
+  GIT_REPOSITORY    https://github.com/cppengineer/asio-wrapper.git
+  GIT_TAG           development/main
+  SOURCE_DIR        "${CMAKE_CURRENT_BINARY_DIR}/asio-wrapper-src"
+  BINARY_DIR        "${CMAKE_CURRENT_BINARY_DIR}/asio-wrapper-build"
+  CONFIGURE_COMMAND ""
+  BUILD_COMMAND     ""
+  INSTALL_COMMAND   ""
+  TEST_COMMAND      ""
+)

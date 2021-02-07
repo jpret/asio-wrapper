@@ -44,7 +44,11 @@ set(ASIO_WRAPPER_SOURCES
 set(ASIO_WRAPPER_TEST_SOURCES
     ${PROJECT_SOURCE_DIR}/src/tcp/test/tcp_test.cc)
 
+# create and export the library
+add_library(asio_wrapper 
+            ${ASIO_WRAPPER_SOURCES})
+export(PACKAGE asio_wrapper)
+
 # add sub_directories
 add_subdirectory(lib)
-add_subdirectory(src)
 add_subdirectory(test)

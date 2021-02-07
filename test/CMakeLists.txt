@@ -40,7 +40,7 @@ endif()
 
 # Now simply link against gtest or gtest_main as needed. Eg
 add_executable(asio-wrapper-tests main.cc ${ASIO_WRAPPER_SOURCES} ${ASIO_WRAPPER_TEST_SOURCES})
-target_link_libraries(asio-wrapper-tests gtest_main)
+target_link_libraries(asio-wrapper-tests gtest_main asio_wrapper)
 add_test(NAME asio-wrapper-tests COMMAND asio-wrapper-tests)
 
 # END OF COPIED CODE #
