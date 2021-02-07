@@ -27,7 +27,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # include directories
 include_directories(include
-                    ${CMAKE_BINARY_DIR}/lib/asio/asio-src/asio/include)
+                    ${CMAKE_CURRENT_BINARY_DIR}/lib/asio/asio-src/asio/include)
 
 # add sub_directories
 add_subdirectory(lib)

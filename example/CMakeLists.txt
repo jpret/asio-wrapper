@@ -16,11 +16,10 @@ if(result)
   message(FATAL_ERROR "Build step for asio-wrapper failed: ${result}")
 endif()
 
-# Add asio-wrapper directly to our build.
-add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/asio-wrapper-src
-                 ${CMAKE_CURRENT_BINARY_DIR}/asio-wrapper-build)
-
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/asio-wrapper-src/include)
+
+# Add asio-wrapper directly to our build.
+add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/asio-wrapper-src)
 
 # Link against asio-wrapper to our executable
 add_executable(asio-wrapper-example main.cc)
