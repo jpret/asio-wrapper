@@ -17,7 +17,7 @@
 #include <set>
 #include <string>
 
-#include "asio/asio.hpp"
+#include "asio.hpp"
 #include "interfaces/connection_manager.h"
 #include "interfaces/writable.h"
 #include "interfaces/writable_handler.h"

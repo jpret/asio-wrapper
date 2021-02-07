@@ -17,8 +17,3 @@ execute_process(COMMAND ${CMAKE_COMMAND} --build .
 if(result)
   message(FATAL_ERROR "Build step for ASIO failed: ${result}")
 endif() 
-
-# Ensure we copy the build files to the correct include directory #
-# This is only to ensure we stick to the #include pattern of the Google Style Guide
-file(COPY ${CMAKE_CURRENT_BINARY_DIR}/asio-src/asio/include/asio ${CMAKE_CURRENT_BINARY_DIR}/asio-src/asio/include/asio.hpp
-     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/asio)

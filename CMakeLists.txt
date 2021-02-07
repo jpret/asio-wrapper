@@ -27,9 +27,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # include directories
 include_directories(include
-                    ${CMAKE_BINARY_DIR}/lib/asio 
-                    ${CMAKE_BINARY_DIR}/lib/asio/asio
-                    src)
+                    ${CMAKE_BINARY_DIR}/lib/asio/asio-src/asio/include)
+
+# add sub_directories
+add_subdirectory(lib)
 
 # set the source files
 set(ASIO_WRAPPER_SOURCES
@@ -49,6 +50,5 @@ add_library(asio_wrapper
             ${ASIO_WRAPPER_SOURCES})
 export(PACKAGE asio_wrapper)
 
-# add sub_directories
-add_subdirectory(lib)
+# Add test subdirectory
 add_subdirectory(test)
