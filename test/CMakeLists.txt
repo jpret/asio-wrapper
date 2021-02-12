@@ -38,9 +38,12 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
   include_directories("${gtest_SOURCE_DIR}/include")
 endif()
 
+# END OF COPIED CODE #
+
 # Now simply link against gtest or gtest_main as needed. Eg
-add_executable(asio-wrapper-tests main.cc ${ASIO_WRAPPER_SOURCES} ${ASIO_WRAPPER_TEST_SOURCES})
+set(ASIO_WRAPPER_TEST_SOURCES
+    ${PROJECT_SOURCE_DIR}/test/asio-wrapper-test.cpp)
+
+add_executable(asio-wrapper-tests main.cpp ${ASIO_WRAPPER_TEST_SOURCES})
 target_link_libraries(asio-wrapper-tests gtest_main asio_wrapper)
 add_test(NAME asio-wrapper-tests COMMAND asio-wrapper-tests)
-
-# END OF COPIED CODE #

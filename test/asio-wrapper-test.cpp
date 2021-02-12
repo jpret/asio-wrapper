@@ -5,24 +5,23 @@
     LICENCE:        MIT
     PROJECT:        asio-wrapper
     DESCRIPTION:    An ASIO wrapper
+    VERSION:        1.0.0
 
-    FILE:           tcp/test.cc
+    FILE:           asio-wrapper-test.cpp
     URL: 	        https://github.com/cppengineer/asio-wrapper
 
 *******************************************************************************/
 
 #include "gtest/gtest.h"
-#include "interfaces/writable_handler.h"
-#include "tcp/server.h"
-#include "tcp/client.h"
+#include "asio-wrapper.hpp"
 
 namespace cppeng {
 namespace tcp {
 
-class WritableHandlerImplServer : public interfaces::WritableHandler {
+class WritableHandlerImplServer : public WritableHandler {
 public:
     void HandleCallback(void* data, int len,
-                        std::shared_ptr<interfaces::Writable> writable) {
+                        std::shared_ptr<Writable> writable) {
         // Convert void pointer to string
         std::string received((uint8_t*)data, (uint8_t*)data + len);
         std::cout << "Server Rx: " << received << std::endl;
@@ -36,16 +35,18 @@ public:
     }
 };
 
-class WritableHandlerImplClient : public interfaces::WritableHandler {
+class WritableHandlerImplClient : public WritableHandler {
 public:
     void HandleCallback(void* data, int len,
-        std::shared_ptr<interfaces::Writable> writable) {
+        std::shared_ptr<Writable> writable) {
         // Convert void pointer to string
         std::string received((uint8_t*)data, (uint8_t*)data + len);
         std::cout << "Client Rx: " << received << std::endl;
         // Assert received request
         EXPECT_TRUE(strcmp(received.c_str(), "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nConnection: close\r\nContent-Length: 28\r\n\r\n<h1>Testing is Awesome!</h1>")==0);
+        rx_flag_ = true;
     }
+    bool rx_flag_{ false };
 };
 
 TEST(ServerUnitTests, StartUpServer) {
@@ -74,6 +75,7 @@ TEST(ServerUnitTests, StartUpClient) {
     // Stop the client and the server
     EXPECT_TRUE(client.Stop());
     EXPECT_TRUE(server.Stop());
+    EXPECT_TRUE(writable_handler_client.rx_flag_);
 }
 
 } // namespace tcp

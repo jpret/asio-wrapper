@@ -1,12 +1,20 @@
 
-# Cpp::Engineer.com 
-# Project: asio-wrapper
-# Year: 2021
+#[[
+    COPYRIGHT:      Cpp::Engineer 2021
 
-# Welcome to the Top-Level CMakeLists.txt file for the asio-wrapper library #
+    LICENCE:        MIT
+    PROJECT:        asio-wrapper
+    DESCRIPTION:    An ASIO wrapper
+    VERSION:        1.0.0
 
-# We used the Tutorial from cmake.org to setup our initial CMake file #
-# https://cmake.org/cmake/help/latest/guide/tutorial/index.html #
+    FILE:           CMakeLists.txt
+    URL: 	        https://github.com/cppengineer/asio-wrapper
+]]#
+
+# Welcome to the Top-Level CMakeLists.txt file for the asio-wrapper library 
+
+# We used the Tutorial from cmake.org to setup our initial CMake file 
+# https://cmake.org/cmake/help/latest/guide/tutorial/index.html 
 
 # First we'll specify the minimum cmake version for this project
 cmake_minimum_required(VERSION 2.8.12)
@@ -34,16 +42,7 @@ add_subdirectory(lib)
 
 # set the source files
 set(ASIO_WRAPPER_SOURCES
-    # tcp
-    ${PROJECT_SOURCE_DIR}/src/tcp/server.cc 
-    ${PROJECT_SOURCE_DIR}/src/tcp/client.cc 
-    ${PROJECT_SOURCE_DIR}/src/tcp/acceptor.cc 
-    ${PROJECT_SOURCE_DIR}/src/tcp/connector.cc
-    ${PROJECT_SOURCE_DIR}/src/tcp/connection_manager.cc 
-    ${PROJECT_SOURCE_DIR}/src/tcp/connection.cc)
-
-set(ASIO_WRAPPER_TEST_SOURCES
-    ${PROJECT_SOURCE_DIR}/src/tcp/test/tcp_test.cc)
+    ${PROJECT_SOURCE_DIR}/src/asio-wrapper.cpp)
 
 # create and export the library
 add_library(asio_wrapper 
