@@ -34,3 +34,5 @@
 # Additional
 out/
 .vs/
+.vscode/
+.idea/

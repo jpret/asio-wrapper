@@ -1,49 +1,24 @@
+cmake_minimum_required(VERSION 2.8.12)
 
-# We can add GTest for Test Driven Development (TDD) purposes to our project
-# as desribed by this tutorial: https://chromium.googlesource.com/external/github.com/google/googletest/+/HEAD/googletest/README.md
+# Build GTest only when we are testing
+add_subdirectory("${PROJECT_SOURCE_DIR}/extern/googletest" "extern/googletest")
 
-# Note that the code below has been copied from the link provided above.
+# Keep our Cache clean
+# Source: https://cliutils.gitlab.io/modern-cmake/chapters/testing/googletest.html
+mark_as_advanced(
+        BUILD_GMOCK BUILD_GTEST BUILD_SHARED_LIBS
+        gmock_build_tests gtest_build_samples gtest_build_tests
+        gtest_disable_pthreads gtest_force_shared_crt gtest_hide_internal_symbols
+)
+# Keep IDE folders clean
+set_target_properties(gtest PROPERTIES FOLDER extern)
+set_target_properties(gtest_main PROPERTIES FOLDER extern)
+set_target_properties(gmock PROPERTIES FOLDER extern)
+set_target_properties(gmock_main PROPERTIES FOLDER extern)
 
-# START OF COPIED CODE #
+# Add test sources here
+set(ASIO_WRAPPER_TEST_SOURCES main.cpp asio_wrapper_test.cpp main.cpp)
 
-# Download and unpack googletest at configure time
-configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
-execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-  RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
-if(result)
-  message(FATAL_ERROR "CMake step for googletest failed: ${result}")
-endif()
-execute_process(COMMAND ${CMAKE_COMMAND} --build .
-  RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
-if(result)
-  message(FATAL_ERROR "Build step for googletest failed: ${result}")
-endif()
-
-# Prevent overriding the parent project's compiler/linker
-# settings on Windows
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-
-# Add googletest directly to our build. This defines
-# the gtest and gtest_main targets.
-add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
-                 ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
-                 EXCLUDE_FROM_ALL)
-
-# The gtest/gtest_main targets carry header search path
-# dependencies automatically when using CMake 2.8.11 or
-# later. Otherwise we have to add them here ourselves.
-if (CMAKE_VERSION VERSION_LESS 2.8.11)
-  include_directories("${gtest_SOURCE_DIR}/include")
-endif()
-
-# END OF COPIED CODE #
-
-# Now simply link against gtest or gtest_main as needed. Eg
-set(ASIO_WRAPPER_TEST_SOURCES
-    ${PROJECT_SOURCE_DIR}/test/asio-wrapper-test.cpp)
-
-add_executable(asio-wrapper-tests main.cpp ${ASIO_WRAPPER_TEST_SOURCES})
-target_link_libraries(asio-wrapper-tests gtest_main asio_wrapper)
-add_test(NAME asio-wrapper-tests COMMAND asio-wrapper-tests)
+# Create our test executable and link the gtest_main to it
+add_executable(${PROJECT_NAME}_tests ${ASIO_WRAPPER_TEST_SOURCES})
+target_link_libraries(${PROJECT_NAME}_tests gtest ${PROJECT_NAME})
