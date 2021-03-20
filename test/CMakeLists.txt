@@ -17,8 +17,8 @@ set_target_properties(gmock PROPERTIES FOLDER extern)
 set_target_properties(gmock_main PROPERTIES FOLDER extern)
 
 # Add test sources here
-set(ASIO_WRAPPER_TEST_SOURCES main.cpp asio_wrapper_test.cpp main.cpp)
+set(ASIO_WRAPPER_TEST_SOURCES asio_wrapper_test.cpp)
 
 # Create our test executable and link the gtest_main to it
 add_executable(${PROJECT_NAME}_tests ${ASIO_WRAPPER_TEST_SOURCES})
-target_link_libraries(${PROJECT_NAME}_tests gtest ${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME}_tests gtest gtest_main ${PROJECT_NAME})

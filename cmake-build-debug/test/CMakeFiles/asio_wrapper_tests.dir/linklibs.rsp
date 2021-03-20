@@ -1,0 +1,1 @@
+ ../lib/libgtestd.a ../lib/libgtest_maind.a ../src/libasio_wrapper.a ../lib/libgtestd.a -lws2_32 -lwsock32 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

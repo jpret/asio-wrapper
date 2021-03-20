@@ -83,7 +83,6 @@ TEST(ServerUnitTests, StartUpAndStopClient) {
   // Stop the client and the server
   EXPECT_TRUE(client.Stop());
   EXPECT_TRUE(server.Stop());
-  //Todo: We should use a mock rather than a flag here
   EXPECT_TRUE(writable_handler_client.rx_flag_);
 }
 
