@@ -16,13 +16,8 @@ jobs:
     - name: Build setup
       shell: bash
       run: |
-        pwd
-        ls -l
-        build
+        mkdir build
         cd build
         pwd
         ls -l
         ls -l ..
-        cmake --version
-        make --version
-        g++ --version
