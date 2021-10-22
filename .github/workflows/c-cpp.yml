@@ -13,17 +13,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Navigate into folder
-      run: cd asio-wrapper
-    - name: Create build folder
-      run: mkdir build
-    - name: Navigate into build folder
-      run: cd build
-    - name: Check path
-      run: pwd
-    - name: Check contents
-      run: ls -l
-    - name: Initialize cmake
-      run: cmake ..
-    - name: Run make
-      run: make
+    - name: Build setup
+      shell: bash
+      run: |
+        pwd
+        ls -l
+        mkdir -p asio-wrapper/build
+        cd asio-wrapper/build
+        pwd
+        ls -l
+        cmake --version
+        make --version
+        g++ --version
