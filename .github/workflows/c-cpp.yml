@@ -13,11 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build setup
+    - name: Setup cmake
       shell: bash
       run: |
         mkdir build
         cd build
-        pwd
-        ls -l
-        ls -l ..
+        cmake ..
+    - name: Build with make
+      shell: bash
+      run: |
+        make
