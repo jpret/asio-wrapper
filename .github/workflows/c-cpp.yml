@@ -13,10 +13,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Create build folder
-      run: mkdir -p asio-wrapper/build
     - name: Navigate into folder
-      run: cd asio-wrapper/build
+      run: cd asio-wrapper
+    - name: Create build folder
+      run: mkdir build
+    - name: Navigate into build folder
+      run: cd build
     - name: Check path
       run: pwd
     - name: Check contents
