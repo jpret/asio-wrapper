@@ -14,7 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Create build folder
-      run: mkdir build
+      run: mkdir -p asio-wrapper/build
+    - name: Navigate into folder
+      run: cd asio-wrapper/build
     - name: Initialize cmake
       run: cmake ..
     - name: Run make
