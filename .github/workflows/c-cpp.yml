@@ -18,10 +18,11 @@ jobs:
       run: |
         pwd
         ls -l
-        mkdir -p asio-wrapper/build
-        cd asio-wrapper/build
+        build
+        cd build
         pwd
         ls -l
+        ls -l ..
         cmake --version
         make --version
         g++ --version
